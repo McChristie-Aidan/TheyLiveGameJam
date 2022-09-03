@@ -1,16 +1,15 @@
-#if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem;
-#endif
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
     public float speed = 12f;
+    Vector3 activeMoveSpeed;
+    public float acceleration = 2f;
     public float gravity = -10f;
     public float jumpHeight = 2f;
 
@@ -73,9 +72,11 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
-        controller.Move(move * speed * Time.deltaTime);
+        activeMoveSpeed = Vector3.Lerp(activeMoveSpeed, move * speed, acceleration * Time.deltaTime);
+
+        controller.Move(activeMoveSpeed * Time.deltaTime);
 
         if (jumpPressed && isGrounded)
         {
