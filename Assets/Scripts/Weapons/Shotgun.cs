@@ -34,5 +34,6 @@ public class Shotgun : Weapon
             ShootBullet(forward);
             shootSound.Play();
         }
+        base.Fire();
     }
 }

@@ -8,6 +8,8 @@ public class Sway : MonoBehaviour
     public float intensity =1f;
     public float smooth =1f;
 
+    public float tiltIntensity = 2f;
+
     private Quaternion originPos;
 
     private void Start()
@@ -29,7 +31,7 @@ public class Sway : MonoBehaviour
 
         Quaternion xAdjustment = Quaternion.AngleAxis(intensity * -mouseX,Vector3.up);
         Quaternion yAdjustment = Quaternion.AngleAxis(intensity * mouseY,Vector3.right);
-        Quaternion zAdjustment = Quaternion.AngleAxis(intensity * -mouseX, Vector3.forward);
+        Quaternion zAdjustment = Quaternion.AngleAxis(tiltIntensity * -mouseX, Vector3.forward);
         Quaternion targetRot = originPos * xAdjustment * yAdjustment * zAdjustment;
 
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRot, Time.deltaTime * smooth);

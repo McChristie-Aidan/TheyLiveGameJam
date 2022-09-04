@@ -15,15 +15,18 @@ public class Weapon : MonoBehaviour, IWeapon
     public Transform originPoint;
     public GameObject hitDecal;
 
+    Recoil recoil;
+
     public virtual void Fire()
     {
-        throw new System.NotImplementedException();
+        recoil.RecoilFire();
     }
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         shootSound = GetComponent<AudioSource>();
+        recoil = GameObject.FindGameObjectWithTag("Recoil").GetComponent<Recoil>();
     }
 
     // Update is called once per frame

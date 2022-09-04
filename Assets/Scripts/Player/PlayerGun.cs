@@ -18,7 +18,7 @@ public class PlayerGun : MonoBehaviour
         if (Time.time > timeStamp && !readyToFire)
         {
             readyToFire = !readyToFire;
-            Debug.Log("Ready To Fire!");
+            //Debug.Log("Ready To Fire!");
         }
     }
 
@@ -31,11 +31,11 @@ public class PlayerGun : MonoBehaviour
                 weapon.Fire();
                 timeStamp = Time.time + cooldownLength;
                 readyToFire = !readyToFire;
-                Debug.Log("fired");
+                //Debug.Log("fired");
             }
             else
             {
-                Debug.Log("Not Ready to fire");
+                //Debug.Log("Not Ready to fire");
             }
         }
     }
