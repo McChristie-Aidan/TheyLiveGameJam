@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        Debug.Log(isGrounded);
 
         if (isGrounded && velocity.y < 0)
         {
@@ -95,11 +96,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (callbackContext.performed && gameObject.scene.IsValid())
         {
-            //if(isGrounded)
-            //{
-            //    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            //}
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            if (isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+            //velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
         else
         {
