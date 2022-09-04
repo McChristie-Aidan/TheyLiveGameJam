@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-interface IWeapon
+public interface IWeapon
 {
     void Fire();
 }
 
 public class Weapon : MonoBehaviour, IWeapon
 {
+    protected AudioSource shootSound;
+
     public Transform originPoint;
     public GameObject hitDecal;
 
@@ -18,9 +21,9 @@ public class Weapon : MonoBehaviour, IWeapon
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
+        shootSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class Weapon : MonoBehaviour, IWeapon
             Debug.DrawRay(originPoint.position, direction * hit.distance, Color.yellow);
             Debug.Log("hit: " + hit.collider.gameObject.name);
 
-            Instantiate(hitDecal, hit.point, this.transform.rotation);
+            Instantiate(hitDecal, hit.point, Camera.main.transform.rotation);
         }
         else
         {

@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 activeMoveSpeed;
     public float acceleration = 2f;
     public float gravity = -10f;
+    public float jumpGrav = -5f;
     public float jumpHeight = 2f;
 
     public Transform groundCheck;
@@ -23,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
 #if ENABLE_INPUT_SYSTEM
     InputAction movement;
-    InputAction jump;
 
     void Start()
     {
@@ -38,11 +38,8 @@ public class PlayerMovement : MonoBehaviour
             .With("Right", "<Keyboard>/d")
             .With("Right", "<Keyboard>/rightArrow");
 
-        jump = new InputAction("PlayerJump", binding: "<Gamepad>/a");
-        jump.AddBinding("<Keyboard>/space");
 
         movement.Enable();
-        jump.Enable();
     }
 
 #endif
@@ -58,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
         var delta = movement.ReadValue<Vector2>();
         x = delta.x;
         z = delta.y;
-        jumpPressed = Mathf.Approximately(jump.ReadValue<float>(), 1);
 #else
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
@@ -78,13 +74,36 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(activeMoveSpeed * Time.deltaTime);
 
-        if (jumpPressed && isGrounded)
+        //if (jumpPressed && isGrounded)
+        //{
+        //    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        //}
+
+        if (velocity.y > 0)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y += jumpGrav * Time.deltaTime;
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
         }
 
-        velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void OnJump(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && gameObject.scene.IsValid())
+        {
+            //if(isGrounded)
+            //{
+            //    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            //}
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+        else
+        {
+            Debug.Log("Cant jump");
+        }
     }
 }
