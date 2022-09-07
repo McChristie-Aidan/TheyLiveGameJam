@@ -1179,6 +1179,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 293986673}
     - target: {fileID: 6568703911603126828, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
+      propertyPath: injectionPoint
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568703911603126828, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
       propertyPath: customPasses.Array.data[0].enabled
       value: 1
       objectReference: {fileID: 0}
@@ -1225,6 +1229,18 @@ PrefabInstance:
     - target: {fileID: 6568703911603126828, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
       propertyPath: customPasses.Array.data[1].overrideMaterial
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568703911603126828, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
+      propertyPath: customPasses.Array.data[0].targetColorBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568703911603126828, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
+      propertyPath: customPasses.Array.data[1].targetColorBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568703911603126828, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
+      propertyPath: customPasses.Array.data[1].overrideDepthState
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6568703911963519872, guid: 5662f2789e731d247be3f0ff8f9c6506, type: 3}
       propertyPath: m_RootOrder
